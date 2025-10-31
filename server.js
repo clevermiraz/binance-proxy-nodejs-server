@@ -27,8 +27,10 @@ app.use("/api", async (req, res) => {
       },
     });
 
-    const data = await response.text(); // get text first (might be JSON)
-    res.status(response.status).send(data);
+    // Parse JSON safely
+    const data = await response.json();
+
+    res.status(response.status).json(data); // send as JSON
   } catch (err) {
     console.error("Error proxying request:", err);
     res.status(500).json({ error: "Proxy Error", details: err.message });
