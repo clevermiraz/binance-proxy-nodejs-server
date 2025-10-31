@@ -82,6 +82,6 @@ wss.on("connection", (clientSocket, req) => {
   clientSocket.on("error", closeBoth);
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`WebSocket proxy running on port ${PORT}`);
 });
