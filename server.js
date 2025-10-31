@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const { WebSocketServer, WebSocket } = require("ws");
 const http = require("http");
@@ -9,6 +11,8 @@ const wss = new WebSocketServer({ noServer: true });
 
 const BINANCE_BASE = "wss://stream.binance.com:9443";
 const BINANCE_HTTP = "https://api.binance.com";
+
+const PORT = process.env.PORT || 4000;
 
 // ===== HTTP FETCH PROXY =====
 app.use("/api", async (req, res) => {
@@ -78,6 +82,6 @@ wss.on("connection", (clientSocket, req) => {
   clientSocket.on("error", closeBoth);
 });
 
-server.listen(4000, () => {
-  console.log("WebSocket proxy running on (port 4000)");
+server.listen(PORT, () => {
+  console.log(`WebSocket proxy running on port ${PORT}`);
 });
