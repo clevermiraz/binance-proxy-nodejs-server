@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors");
 
 const express = require("express");
 const { WebSocketServer, WebSocket } = require("ws");
@@ -8,6 +9,8 @@ const fetch = require("node-fetch"); // npm install node-fetch@2
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocketServer({ noServer: true });
+
+app.use(cors()); // allow all origins
 
 const BINANCE_BASE = "wss://stream.binance.com:9443";
 const BINANCE_HTTP = "https://api.binance.com";
